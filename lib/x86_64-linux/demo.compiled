@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<CONFIG>
-  <Compiler Value="/usr/bin/fpc" Date="1325682930"/>
-  <Params Value=" -MObjFPC -Scghi -O1 -gl -vewnhi -l -Fi/home/baijian/fpc-projects/demo/lib/x86_64-linux -Fu/home/baijian/fpc-projects/demo/ -Fu. -FU/home/baijian/fpc-projects/demo/lib/x86_64-linux/ -odemo demo.lpr"/>
-</CONFIG>

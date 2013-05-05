@@ -5,7 +5,6 @@
     <General>
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
-        <MainUnitHasTitleStatement Value="False"/>
       </Flags>
       <MainUnit Value="0"/>
       <ResourceType Value="res"/>
@@ -34,14 +33,14 @@
     </RunParams>
     <Units Count="1">
       <Unit0>
-        <Filename Value="demo.lpr"/>
+        <Filename Value="Console1.lpr"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="demo"/>
+        <UnitName Value="Console1"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="1"/>
+        <TopLine Value="57"/>
+        <CursorPos X="33" Y="76"/>
         <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -51,7 +50,7 @@
   <CompilerOptions>
     <Version Value="9"/>
     <Target>
-      <Filename Value="demo"/>
+      <Filename Value="Console1"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>

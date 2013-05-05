@@ -1,0 +1,133 @@
+program Console1;
+
+{$mode objfpc}{$H+}
+
+uses
+  {$IFDEF UNIX}{$IFDEF UseCThreads}
+  cthreads,
+  {$ENDIF}{$ENDIF}
+  Classes, SysUtils, CustApp, process
+  { you can add units after this };
+
+type
+
+  { TMyApplication }
+
+  TMyApplication = class(TCustomApplication)
+  protected
+    procedure DoRun; override;
+    procedure CpFile(filename:string; destfile:string; basedir:string);
+  public
+    constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure WriteHelp; virtual;
+  end;
+
+  var
+    name: string;
+    baseLoc: string;
+    filename: string;
+    destLoc: string;
+
+{ TMyApplication }
+
+procedure ExecuteCommand(cmd, path:string);
+var
+  AProces: TProcess;
+  begin
+    AProces := TProcess.Create(nil);
+    AProces.CurrentDirectory := path;
+    AProces.CommandLine := cmd;
+    AProces.Options := AProces.Options + [poWaitOnExit, poUsePipes];
+    AProces.ShowWindow := swoNone;
+    try
+      AProces.Execute;
+    except
+      on Ex: Exception do
+      begin
+        writeln('');
+        writeln('Error: ' + Ex.Message);
+        writeln('');
+      end;
+    end;
+    AProces.Free;
+  end;
+
+procedure TMyApplication.DoRun;
+begin
+  // parse parameters
+  if HasOption('h','help') then begin
+    WriteHelp;
+    Terminate;
+    Exit;
+  end;
+  if HasOption('en') then
+   begin
+     name:=GetOptionValue('en');
+   end;
+  if HasOption('base') then
+   begin
+     baseLoc:=GetOptionValue('base');
+   end;
+  if HasOption('dest') then
+   begin
+     destLoc:=GetOptionValue('dest');
+   end;
+  if HasOption('f') then
+   begin
+     filename:=GetOptionValue('f');
+   end;
+  if (name = '') or (baseLoc = '') or (destLoc='') or (filename='') then
+   begin
+     WriteHelp;
+     Terminate;
+     Exit;
+   end;
+
+  { add your program here }
+  writeln('Hi ' + name + ',begin copying....');
+  CpFile(filename, destLoc,baseLoc);
+  writeln('copy finished.');
+
+  // stop program loop
+  Terminate;
+end;
+
+procedure TMyApplication.CpFile(filename:string; destfile:string; basedir:string);
+  begin
+    ExecuteCommand('cp '+ baseLoc + ' ' + destLoc, basedir);
+  end;
+
+constructor TMyApplication.Create(TheOwner: TComponent);
+begin
+  inherited Create(TheOwner);
+  StopOnException:=True;
+end;
+
+destructor TMyApplication.Destroy;
+begin
+  inherited Destroy;
+end;
+
+procedure TMyApplication.WriteHelp;
+begin
+  { add your help code here }
+  writeln('Usage: ',ExeName,' -h');
+  writeln(' -en <your english name>');
+  writeln(' -base <the file directory>');
+  writeln(' -f <the file name in below directory you want to copy>');
+  writeln(' -dest <the destination you want to copy to>');
+end;
+
+var
+  Application: TMyApplication;
+
+{$R *.res}
+
+begin
+  Application:=TMyApplication.Create(nil);
+  Application.Title:='HelloWorld';
+  Application.Run;
+  Application.Free;
+end.
+

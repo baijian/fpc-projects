@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Compiler Value="/usr/local/bin/ppc386" Date="1325254654"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -gl -vewnhi -l -Fi/Users/rarnu/bj/fpc/consoles/lib/i386-darwin -Fu/Users/rarnu/bj/fpc/consoles/ -Fu. -FU/Users/rarnu/bj/fpc/consoles/lib/i386-darwin/ -oConsole1 Console1.lpr"/>
+</CONFIG>
